@@ -1,0 +1,256 @@
+@import "./colors";
+@import "./mixins";
+@import "./variable";
+
+#preloader {
+  background: $off-white url("../../dist/logo/twitter-loader-network-gif.gif")
+    no-repeat center;
+  background-size: 100%;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+  display: none;
+}
+
+.container-flex {
+  display: flex;
+}
+.logo {
+  width: 40%;
+  background: $dark-primary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 92vh;
+}
+
+.login {
+  width: 60%;
+  padding-left: 4rem;
+  padding-top: 4rem;
+  height: 92vh;
+
+  &__icon {
+    padding-top: 4rem;
+  }
+  &__header {
+    padding-top: 3rem;
+
+    &-info {
+      margin-bottom: 1.5rem;
+      font-size: 4rem;
+      font-weight: 500;
+      word-spacing: 0.2rem;
+      letter-spacing: 0.1rem;
+    }
+    &-suggestion {
+      font-size: 1.5rem;
+      font-weight: 400;
+      word-spacing: 0.2rem;
+    }
+  }
+  &__button {
+    width: 20rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &-google {
+      button {
+        @include btn;
+
+        &:hover {
+          @include btnHover;
+        }
+      }
+    }
+    &-signup {
+      button {
+        margin-top: 0.7rem;
+        @include btn;
+        &:hover {
+          @include btnHover;
+        }
+      }
+    }
+    &-login {
+      button {
+        margin-top: 0.7rem;
+        @include btn;
+        &:hover {
+          @include btnHover;
+        }
+      }
+    }
+  }
+}
+.google-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer {
+  padding-top: 0.6rem;
+  width: 80%;
+  margin: 0 auto;
+  &__items {
+    width: 100%;
+    &-list {
+      display: flex;
+      list-style-type: none;
+      justify-content: space-evenly;
+      &-link {
+        text-decoration: none;
+        opacity: 0.3;
+        font-size: 0.7rem;
+        color: $black;
+        transition: all 0.5s;
+        &:hover {
+          color: $primary-blue;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+.footer-second {
+  padding-top: 0.3rem;
+  width: 50%;
+  margin: 0 auto;
+  &__items {
+    width: 100%;
+    &-second-list {
+      display: flex;
+      list-style-type: none;
+      justify-content: space-evenly;
+      &-link {
+        text-decoration: none;
+        opacity: 0.3;
+        font-size: 0.7rem;
+        color: $black;
+        transition: all 0.5s;
+        &:hover {
+          color: $primary-blue;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+.container-login-one {
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container-login {
+  margin-top: 3rem;
+  &-btn {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+  }
+  &-button {
+    text-align: center;
+    @include blueBtn;
+  }
+}
+.login__field {
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30rem;
+  // transform: translateY(-30%);
+  &-header {
+    margin-top: 2rem;
+    &-text {
+      opacity: 0.7;
+      font-weight: 400;
+    }
+  }
+  &-input {
+    width: 100%;
+    height: 11rem;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &-username {
+      @include inputField;
+    }
+    &-password {
+      margin-top: 0.7rem;
+      @include inputField;
+    }
+    &-confirm-password {
+      margin-top: 0.7rem;
+      @include inputField;
+    }
+  }
+  &-input-one {
+    width: 100%;
+    height: 5.5rem;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &-username {
+      @include inputField;
+    }
+    &-password {
+      margin-top: 0.7rem;
+      @include inputField;
+    }
+  }
+  &-button {
+    margin-top: 1.5rem;
+    width: 100%;
+    &-btn {
+      width: 100%;
+      @include blueBtn;
+    }
+  }
+  &-message {
+    margin-top: 1.5rem;
+    text-align: center;
+    &-forgot-password {
+      @include forgot-signupDecoration;
+    }
+    &-sign-up {
+      @include forgot-signupDecoration;
+    }
+  }
+  &-agreement {
+    margin-top: 1.5rem;
+    width: 100%;
+
+    &-info {
+      @include info;
+      &-link {
+        @include forgot-signupDecoration;
+      }
+    }
+  }
+  &-terms {
+    margin-top: 1.5rem;
+    width: 100%;
+    &-info {
+      @include info;
+      &-link {
+        @include forgot-signupDecoration;
+      }
+    }
+  }
+}
+
+.display {
+  display: none;
+}

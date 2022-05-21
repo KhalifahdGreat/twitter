@@ -1,0 +1,52 @@
+@import "./variable";
+@mixin btn() {
+  width: 100%;
+
+  font-size: 0.7rem;
+  color: $primary-blue;
+  border: 0.4px solid $primary-blue;
+  padding: 0.7rem 6rem;
+  border-radius: $border-radius;
+  background: $white;
+  transition: all 0.5s;
+}
+@mixin btnHover() {
+  color: $white;
+  background-color: $primary-blue;
+}
+@mixin blueBtn() {
+  border-radius: $border-radius;
+  border: none;
+  outline: none;
+  padding: 0.7rem 3rem;
+  background: $primary-blue;
+  color: $white;
+  transition: all 0.5s;
+  &:hover {
+    background: lighten($primary-blue, 10%);
+    cursor: pointer;
+  }
+}
+@mixin inputField() {
+  width: 100%;
+  height: 2.3rem;
+  border: none;
+  outline: none;
+  padding: 1rem;
+  &:focus {
+    border-bottom: 1px solid #1da1f2;
+  }
+}
+
+@mixin forgot-signupDecoration() {
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: lighten($primary-blue, 2%);
+  font-weight: 300;
+}
+@mixin info() {
+  word-spacing: 0.1rem;
+  font-size: 0.8rem;
+  font-weight: 300;
+  opacity: 0.5;
+}
