@@ -36,16 +36,17 @@
   }
   &__header {
     padding-top: 3rem;
+    max-width: 40rem;
 
     &-info {
       margin-bottom: 1.5rem;
-      font-size: 4rem;
+      font-size: 5vw;
       font-weight: 500;
       word-spacing: 0.2rem;
       letter-spacing: 0.1rem;
     }
     &-suggestion {
-      font-size: 1.5rem;
+      font-size: 2vw;
       font-weight: 400;
       word-spacing: 0.2rem;
     }
@@ -55,7 +56,6 @@
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     &-google {
       button {
         @include btn;
@@ -139,28 +139,25 @@
   }
 }
 .container-login-one {
-  width: 100%;
-  height: 70vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-top: 10rem;
 }
 .container-login {
-  margin-top: 3rem;
-  &-btn {
-    position: absolute;
-    bottom: 3rem;
-    left: 50%;
+  width: 100%;
 
-    transform: translate(-50%, -50%);
+  margin-top: 5rem;
+  &-btn-signup {
+    margin-top: 13rem;
   }
+  &-btn-login {
+    margin-top: 8rem;
+  }
+
   &-button {
     text-align: center;
     @include blueBtn;
   }
 }
 .login__field {
-  position: relative;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -176,6 +173,7 @@
     }
   }
   &-input {
+    display: relative;
     width: 100%;
     height: 11rem;
     margin-top: 1.5rem;
@@ -211,9 +209,15 @@
     }
   }
   &-button {
-    margin-top: 1.5rem;
-    width: 100%;
-    &-btn {
+    width: 30rem;
+
+    &-btn-signup {
+      margin-top: 0.5rem;
+      width: 100%;
+      @include blueBtn;
+    }
+    &-btn-login {
+      margin-top: 1rem;
       width: 100%;
       @include blueBtn;
     }
@@ -240,7 +244,7 @@
     }
   }
   &-terms {
-    margin-top: 1.5rem;
+    margin-top: 0.7rem;
     width: 100%;
     &-info {
       @include info;
