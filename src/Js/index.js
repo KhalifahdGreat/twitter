@@ -43,12 +43,21 @@ const provider = new GoogleAuthProvider();
 //   console.log(e.target.value);
 // });
 
-const afterLogin = () => {
+const afterLogin = (photo) => {
   const url = "#?mainpage";
+  const img = document.querySelector(
+    ".twitter__nav-list-item-items-profile-img"
+  );
+  const img1 = document.querySelector(
+    ".twitter__main-page-user-icon-event-profile-img"
+  );
+  console.log(img1);
   mainPage.style.display = "flex";
   window.location.href = url;
   signUpScreen.style.display = "none";
   defaultScreen.style.display = "none";
+  img.style.backgroundImage = `url(${photo})`;
+  img1.style.backgroundImage = `url(${photo})`;
 
   loginScreen.style.display = "none";
 };
@@ -62,7 +71,8 @@ google.addEventListener("click", (e) => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      afterLogin();
+      console.log(user);
+      afterLogin(user.photoURL);
       // ...
     })
     .catch((error) => {
