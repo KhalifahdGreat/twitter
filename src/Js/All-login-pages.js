@@ -1,7 +1,8 @@
 // signup event
-const defaultScreen = document.querySelector(".replace-item");
-const signUpScreen = document.querySelector(".container-login");
-const loginScreen = document.querySelector(".container-login-one");
+export const defaultScreen = document.querySelector(".replace-item");
+export const signUpScreen = document.querySelector(".container-login");
+export const loginScreen = document.querySelector(".container-login-one");
+export const mainPage = document.querySelector(".twitter");
 
 const signUpButton = document.querySelector("#login__button-signup");
 const logInButton = document.querySelector("#login__button-login");

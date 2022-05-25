@@ -1,5 +1,159 @@
 import "../scss/main.scss";
 import { Twitter } from "./All-login-pages";
+import {
+  loginScreen,
+  signUpScreen,
+  defaultScreen,
+  mainPage,
+} from "./All-login-pages";
+import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+const firebaseConfig = {
+  apiKey: "AIzaSyAB1VyDJr8qxqBGMQ8z5gVrjVudP-dOqb4",
+  authDomain: "twitter-e8f72.firebaseapp.com",
+  projectId: "twitter-e8f72",
+  storageBucket: "twitter-e8f72.appspot.com",
+  messagingSenderId: "297476739231",
+  appId: "1:297476739231:web:95351f8ebc6c4b0c3f12aa",
+  measurementId: "G-Y78608EE1F",
+};
 const trial = new Twitter("i love this twitter");
 trial.signUp().logIn().previousSignUP().previousLogIn();
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const form = document.querySelector(".login__field-input");
+const nameField = form.name;
+const emailField = form.email;
+const passwordField = form.password;
+const confirmPasswordField = form.confirm_password;
+const confirmPassword = document.querySelector(
+  ".login__field-input-confirm-password"
+);
+const google = document.querySelector(".google-button");
+
+const auth = getAuth();
+const provider = new GoogleAuthProvider();
+// confirmPassword.addEventListener("keyup", (e) => {
+//   e.preventDefault();
+//   console.log(e.target.value);
+// });
+
+const afterLogin = () => {
+  const url = "#?mainpage";
+  mainPage.style.display = "flex";
+  window.location.href = url;
+  signUpScreen.style.display = "none";
+  defaultScreen.style.display = "none";
+
+  loginScreen.style.display = "none";
+};
+
+google.addEventListener("click", (e) => {
+  e.preventDefault();
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      afterLogin();
+      // ...
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
+    });
+});
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const signUp = () => {
+    if (
+      nameField.value.trim() === "" ||
+      emailField.value.trim() === "" ||
+      passwordField.value.trim() === "" ||
+      confirmPasswordField.value.trim() === ""
+    ) {
+      alert("no empty fields allowed");
+      return;
+    } else if (
+      confirmPasswordField.value.trim() !== passwordField.value.trim()
+    ) {
+      document.querySelector(
+        ".login__field-input-confirm-password"
+      ).style.border = "1px solid tomato";
+      setTimeout(() => {
+        confirmPassword.style.border = "0px";
+        confirmPassword.value = "";
+      }, 1000);
+
+      return;
+    } else {
+      const url = "#?login";
+      window.location.href = url;
+      loginScreen.style.display = "block";
+      defaultScreen.style.display = "none";
+      signUpScreen.style.display = "none";
+      //   const person = new Twitter("user has been signedup");
+      //   person.logIn();
+      createUserWithEmailAndPassword(
+        auth,
+        emailField.value.trim(),
+        passwordField.value.trim()
+      )
+        .then((userCredential) => {
+          // Signed in
+
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+    }
+  };
+  signUp();
+});
+
+document
+  .querySelector(".login__field-input-one")
+  .addEventListener("submit", (e) => {
+    e.preventDefault();
+    const login = () => {
+      const email = document
+        .querySelector(".login__field-input-one-username")
+        .value.trim();
+      const password = document
+        .querySelector(".login__field-input-one-password")
+        .value.trim();
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          afterLogin();
+
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+    };
+
+    login();
+  });
