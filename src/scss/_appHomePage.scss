@@ -84,7 +84,9 @@
             width: 2.5rem;
             height: 2.5rem;
             // background-color: $border-color;
-            background: transparent;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
             border-radius: 50%;
           }
           &-emailUsername {
@@ -100,7 +102,6 @@
             }
           }
           &-btn {
-            padding-left: 0.2rem;
             color: $black;
             font-size: 0.9rem;
             font-weight: 600;
@@ -146,20 +147,38 @@
       &-user {
         padding-top: 1.5rem;
         &-icon-event {
-          width: 18rem;
+          width: 21rem;
+          height: 5rem;
           display: flex;
           justify-content: space-between;
-          align-items: flex-end;
+          align-items: center;
           &-profile-img {
-            width: 3rem;
-            height: 3rem;
-            background: transparent;
+            width: 3.2rem;
+            height: 3.2rem;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            object-fit: cover;
             border-radius: 50%;
           }
           &-message {
-            font-size: 1.5rem;
-            font-weight: 400;
-            opacity: 0.7;
+            &-input {
+              width: 17rem;
+              height: 80%;
+              margin-top: 0rem;
+              padding: 0.7rem 0rem;
+              padding-top: 1.5rem;
+              outline: none;
+              font-size: 1.3rem;
+              caret-color: $primary-blue;
+              border: none;
+
+              &::placeholder {
+                font-size: 1.3rem;
+                color: $black;
+                opacity: 0.7;
+              }
+            }
           }
         }
 
@@ -360,13 +379,16 @@
 }
 .width {
   width: 100%;
-  margin-top: 1rem;
-  margin-left: -1rem;
+  margin-top: 2rem;
+  margin-left: -0.1rem;
 }
-.margin {
+.twitter__nav-list-item-margin {
+  width: 80%;
   height: 27vh;
   display: flex;
   flex-direction: column-reverse;
+  align-items: space-around;
+  justify-content: baseline;
 }
 .display {
   display: none;
