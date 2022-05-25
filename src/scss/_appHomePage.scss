@@ -1,0 +1,373 @@
+@import "./colors";
+@import "./mixins";
+@import "./variable";
+@import "./loginMethods";
+::placeholder {
+  font-size: 1rem;
+  font-weight: 200;
+  text-transform: capitalize;
+  color: #aab8c2;
+}
+.twitter {
+  display: flex;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 1);
+  //   navigation
+  &__nav {
+    padding-left: 3.5rem;
+    width: 25%;
+    height: 100vh;
+    display: flex;
+    // justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    &-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      height: 70vh;
+      &-item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        list-style-type: none;
+        padding: 0rem 2rem;
+        transition: all 0.5s;
+        &-container {
+          display: flex;
+          border-radius: 2rem;
+          padding: 1rem 1rem;
+        }
+        &-hover {
+          display: flex;
+          border-radius: 2rem;
+          padding: 0.8rem 1.5rem;
+          &:hover {
+            background-color: #e1e8ed;
+          }
+        }
+        &-icon {
+          font-size: 1.5rem;
+          width: 2.5rem;
+          color: $black;
+        }
+        &-text-container {
+          &-link {
+            text-decoration: none;
+            font-size: 1.1rem;
+            color: $black;
+            opacity: 0.7;
+            font-weight: 400;
+            text-transform: capitalize;
+          }
+        }
+        &-btn {
+          border: none;
+          padding: 1rem 5.5rem;
+          border-radius: 2rem;
+          background-color: $dark-primary-color;
+          color: $white;
+          text-decoration: none;
+          font-size: 1rem;
+          font-size: 1.1rem;
+          font-weight: 600;
+          text-transform: capitalize;
+        }
+        &-items {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          text-decoration: none;
+
+          &-profile-img {
+            width: 2.5rem;
+            height: 2.5rem;
+            // background-color: $border-color;
+            background: transparent;
+            border-radius: 50%;
+          }
+          &-emailUsername {
+            &-username {
+              color: $black;
+              font-size: 0.8rem;
+              font-weight: 500;
+            }
+            &-email {
+              color: $black;
+              opacity: 0.6;
+              font-size: 0.8rem;
+            }
+          }
+          &-btn {
+            padding-left: 0.2rem;
+            color: $black;
+            font-size: 0.9rem;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+  // middle main page
+  &__main {
+    width: 45%;
+    border-left: 2px solid rgba(224, 224, 224, 0.3);
+    border-right: 2px solid rgba(224, 224, 224, 0.3);
+
+    &-page {
+      width: 100%;
+
+      &-heading {
+        padding: 1rem 1rem;
+
+        width: 100%;
+        border-bottom: 2px solid rgba(224, 224, 224, 0.3);
+
+        &-header {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          &-info {
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-transform: capitalize;
+            word-spacing: 0.1rem;
+          }
+          &-container {
+            &-icon {
+              font-size: 1rem;
+              color: $dark-primary-color;
+            }
+          }
+        }
+      }
+      &-user {
+        padding-top: 1.5rem;
+        &-icon-event {
+          width: 18rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          &-profile-img {
+            width: 3rem;
+            height: 3rem;
+            background: transparent;
+            border-radius: 50%;
+          }
+          &-message {
+            font-size: 1.5rem;
+            font-weight: 400;
+            opacity: 0.7;
+          }
+        }
+
+        &-sub-header {
+          width: 100%;
+          margin-top: 2rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          &-list {
+            padding-left: 3rem;
+            width: 10rem;
+            display: flex;
+            justify-content: space-around;
+            &-item {
+              &-btn {
+                font-size: 1rem;
+                color: $primary-blue;
+              }
+            }
+          }
+          &-btn {
+            &-button {
+              border: none;
+              background: transparent;
+              background-color: $dark-primary-color;
+              color: $white;
+              padding: 0.7rem 1.2rem;
+              border-radius: 2rem;
+              font-size: 1.1rem;
+              font-weight: 600;
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+      &-content {
+        padding: 1rem 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &-intro {
+          &-heading {
+            font-size: 2rem;
+            text-transform: capitalize;
+            font-weight: 700;
+          }
+          &-paragraph {
+            font-size: 0.9rem;
+            word-spacing: 0.1rem;
+            letter-spacing: 0.015rem;
+            color: $black;
+            opacity: 0.7;
+          }
+          &-btn {
+            padding-top: 1.2rem;
+            &-button {
+              border: none;
+              background: transparent;
+              background-color: $dark-primary-color;
+              color: $white;
+              padding: 0.9rem 2rem;
+              border-radius: 2rem;
+              font-size: 1.1rem;
+              font-weight: 600;
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+    }
+  }
+  //   search and trend
+  &__trend {
+    padding-left: 2rem;
+    padding-top: 0.3rem;
+
+    width: 30%;
+    &-page {
+      overflow: hidden;
+      &-search-bar {
+        position: relative;
+        width: 100%;
+        &-icon {
+          &-btn {
+            font-size: 1rem;
+            position: absolute;
+            top: 0.75rem;
+            padding-left: 1rem;
+            color: $black;
+          }
+        }
+        &-input {
+          border: none;
+          width: 20rem;
+          height: 2.5rem;
+          padding-left: 3rem;
+          padding-right: 1.5rem;
+          border-radius: 2rem;
+          background-color: #f5f8fa;
+          outline: none;
+        }
+      }
+
+      &-trends {
+        width: 20rem;
+        margin-top: 1rem;
+
+        background-color: #f5f8fa;
+        border-radius: 1rem;
+        &-header {
+          text-transform: capitalize;
+          font-weight: 600;
+          padding: 0.5rem 1rem;
+          font-size: 1rem;
+          word-spacing: 0.1rem;
+          margin-bottom: 1rem;
+        }
+        &-list {
+          height: 73vh;
+          overflow: scroll;
+          &::-webkit-scrollbar {
+            display: none;
+          }
+          &-item {
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-bottom: 1rem;
+            transition: all 0.5s;
+            &:hover {
+              background-color: #e1e8ed;
+            }
+            &-header {
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              &-location {
+                text-transform: capitalize;
+                opacity: 0.7;
+                font-weight: 300;
+              }
+              &-icon {
+                opacity: 0.6;
+              }
+            }
+            &-hashtag {
+              font-size: 0.8rem;
+              font-weight: 500;
+            }
+            &-tweets {
+              opacity: 0.6;
+            }
+          }
+        }
+      }
+      &-terms {
+        margin-top: 1rem;
+        width: 17rem;
+        height: 7vh;
+        display: flex;
+        flex-direction: column;
+        &-first-link-row {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+        }
+        &-second-link-row {
+          width: 50%;
+          display: flex;
+          justify-content: space-between;
+        }
+        &-item {
+          &-link {
+            text-decoration: none;
+            font-size: 0.7rem;
+            text-transform: capitalize;
+            color: $black;
+            opacity: 0.6;
+          }
+          &-date {
+            opacity: 0.6;
+          }
+        }
+      }
+    }
+  }
+}
+
+.logo-bird {
+  color: $dark-primary-color;
+  font-size: 1.8rem;
+  width: 15rem;
+  margin: 0 auto;
+  &:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
+}
+.width {
+  width: 100%;
+  margin-top: 1rem;
+  margin-left: -1rem;
+}
+.margin {
+  height: 27vh;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.display {
+  display: none;
+}
