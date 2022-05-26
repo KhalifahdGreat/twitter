@@ -27,6 +27,12 @@
     cursor: pointer;
   }
 }
+@mixin btnhover() {
+  &:hover {
+    background: lighten($primary-blue, 10%);
+    cursor: pointer;
+  }
+}
 @mixin inputField() {
   width: 100%;
   height: 2.3rem;

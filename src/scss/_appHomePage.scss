@@ -2,12 +2,7 @@
 @import "./mixins";
 @import "./variable";
 @import "./loginMethods";
-::placeholder {
-  font-size: 1rem;
-  font-weight: 200;
-  text-transform: capitalize;
-  color: #aab8c2;
-}
+
 .twitter {
   display: flex;
   height: 100%;
@@ -41,7 +36,7 @@
         &-hover {
           display: flex;
           border-radius: 2rem;
-          padding: 0.8rem 1.5rem;
+          padding: 1rem 1.5rem;
           &:hover {
             background-color: #e1e8ed;
           }
@@ -63,7 +58,7 @@
         }
         &-btn {
           border: none;
-          padding: 1rem 5.5rem;
+          padding: 0.8rem 5.3rem;
           border-radius: 2rem;
           background-color: $dark-primary-color;
           color: $white;
@@ -72,6 +67,8 @@
           font-size: 1.1rem;
           font-weight: 600;
           text-transform: capitalize;
+          transition: all 0.5s;
+          @include btnhover;
         }
         &-items {
           width: 100%;
@@ -190,12 +187,21 @@
           align-items: center;
           &-list {
             padding-left: 3rem;
-            width: 10rem;
+            width: 13rem;
             display: flex;
             justify-content: space-around;
             &-item {
+              width: 2.2rem;
+              padding: 0.3rem 0.2rem;
+              border-radius: 50%;
+              transition: all 0.5s;
+              text-align: center;
+              &:hover {
+                background-color: lighten($primary-blue, 42%);
+              }
               &-btn {
                 font-size: 1rem;
+                padding: 0.2rem;
                 color: $primary-blue;
               }
             }
@@ -211,6 +217,8 @@
               font-size: 1.1rem;
               font-weight: 600;
               text-transform: capitalize;
+              transition: all 0.5s;
+              @include btnhover;
             }
           }
         }
@@ -245,6 +253,8 @@
               font-size: 1.1rem;
               font-weight: 600;
               text-transform: capitalize;
+              transition: all 0.5s;
+              @include btnhover;
             }
           }
         }
@@ -275,11 +285,19 @@
           border: none;
           width: 20rem;
           height: 2.5rem;
+          padding-top: 0.2rem;
           padding-left: 3rem;
           padding-right: 1.5rem;
           border-radius: 2rem;
           background-color: #f5f8fa;
           outline: none;
+          &::placeholder {
+            font-size: 1rem;
+            font-weight: 200;
+            text-transform: capitalize;
+            color: $black;
+            opacity: 0.7;
+          }
         }
       }
 
@@ -373,17 +391,16 @@
   font-size: 1.8rem;
   width: 15rem;
   margin: 0 auto;
+  margin-bottom: 0.5rem;
   &:hover {
     background-color: rgba(255, 255, 255, 1);
   }
 }
 .width {
   width: 100%;
-  margin-top: 2rem;
-  margin-left: -0.1rem;
 }
 .twitter__nav-list-item-margin {
-  width: 80%;
+  width: 16rem;
   height: 27vh;
   display: flex;
   flex-direction: column-reverse;
