@@ -1,5 +1,6 @@
 import "../scss/main.scss";
 import { Twitter } from "./All-login-pages";
+import { Suggested } from "./suggested";
 import {
   loginScreen,
   signUpScreen,
@@ -7,6 +8,8 @@ import {
   mainPage,
 } from "./All-login-pages";
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+const db = getFirestore(app);
 // import { getAnalytics } from "firebase/analytics";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
@@ -26,6 +29,9 @@ trial.signUp().logIn().previousSignUP().previousLogIn();
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const test = new Suggested("khalifah", "khalifah@gmail.com");
+
+test.pushInfo();
 const form = document.querySelector(".login__field-input");
 const nameField = form.name;
 const emailField = form.email;
@@ -57,6 +63,11 @@ const afterLogin = (photo, user, email) => {
   const userEmail = document.querySelector(
     ".twitter__nav-list-item-items-emailUsername-email"
   );
+  const letsGo = document.querySelector(
+    ".twitter__main-page-content-intro-btn-button"
+  );
+  const main = document.querySelector(".twitter__main-page");
+  const suggested = document.querySelector(".twitter__main-suggested");
 
   console.log(img1);
   mainPage.style.display = "flex";
@@ -67,6 +78,11 @@ const afterLogin = (photo, user, email) => {
   img1.style.backgroundImage = `url(${photo})`;
   userName.textContent = user;
   userEmail.textContent = email;
+  letsGo.addEventListener("click", (e) => {
+    e.preventDefault();
+    main.style.display = "none";
+    suggested.style.display = "block";
+  });
 
   loginScreen.style.display = "none";
 };
@@ -80,7 +96,7 @@ google.addEventListener("click", (e) => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      console.log(user);
+      console.log(result);
       afterLogin(user.photoURL, user.displayName, user.email);
       // ...
     })
