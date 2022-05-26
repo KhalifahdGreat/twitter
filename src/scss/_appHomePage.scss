@@ -115,6 +115,7 @@
 
     &-page {
       width: 100%;
+      height: 100vh;
 
       &-heading {
         padding: 1rem 1rem;
@@ -255,6 +256,93 @@
               text-transform: capitalize;
               transition: all 0.5s;
               @include btnhover;
+            }
+          }
+        }
+      }
+    }
+    &-suggested {
+      width: 100%;
+
+      &-header-container {
+        width: 44.8%;
+        height: 3rem;
+        position: fixed;
+        z-index: 999;
+      }
+      &-header-container-back {
+        display: flex;
+        width: 11rem;
+        height: 100%;
+        padding: 1.5rem;
+        justify-content: space-between;
+        align-items: center;
+
+        &-icon {
+          &-btn {
+            color: $black;
+            font-size: 1rem;
+          }
+          &-heading {
+            &-text {
+              font-size: 1.2rem;
+              font-weight: 500;
+              text-transform: capitalize;
+              word-spacing: 0.1rem;
+            }
+          }
+        }
+      }
+      &-user-section {
+        padding-top: 4rem;
+        padding-left: 1.5rem;
+        &-header {
+          &-heading {
+            text-transform: capitalize;
+            font-size: 1.3rem;
+            font-weight: 500;
+          }
+        }
+        &-list {
+          padding-top: 2rem;
+          &-users {
+            padding: 1rem 1rem;
+
+            &-container {
+              list-style-type: none;
+              margin-bottom: 1rem;
+              &-person {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                text-decoration: none;
+
+                &-container {
+                  width: 15rem;
+                  display: flex;
+                  justify-content: space-btween;
+                  align-items: center;
+                  &-emailUsername-username {
+                    font-size: 1rem;
+                    color: $black;
+                  }
+                  &-emailUsername-email {
+                    font-size: 0.7rem;
+                    opacity: 0.6;
+                    color: $black;
+                  }
+                }
+                &-btn {
+                  &-button {
+                    padding: 0.7rem 2rem;
+                    border-radius: 2rem;
+                    outline: none;
+                    border: none;
+                    background-color: $black;
+                    color: $white;
+                  }
+                }
+              }
             }
           }
         }
