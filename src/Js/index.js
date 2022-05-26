@@ -43,7 +43,7 @@ const provider = new GoogleAuthProvider();
 //   console.log(e.target.value);
 // });
 
-const afterLogin = (photo) => {
+const afterLogin = (photo, user, email) => {
   const url = "#?mainpage";
   const img = document.querySelector(
     ".twitter__nav-list-item-items-profile-img"
@@ -51,6 +51,13 @@ const afterLogin = (photo) => {
   const img1 = document.querySelector(
     ".twitter__main-page-user-icon-event-profile-img"
   );
+  const userName = document.querySelector(
+    ".twitter__nav-list-item-items-emailUsername-username"
+  );
+  const userEmail = document.querySelector(
+    ".twitter__nav-list-item-items-emailUsername-email"
+  );
+
   console.log(img1);
   mainPage.style.display = "flex";
   window.location.href = url;
@@ -58,6 +65,8 @@ const afterLogin = (photo) => {
   defaultScreen.style.display = "none";
   img.style.backgroundImage = `url(${photo})`;
   img1.style.backgroundImage = `url(${photo})`;
+  userName.textContent = user;
+  userEmail.textContent = email;
 
   loginScreen.style.display = "none";
 };
@@ -72,7 +81,7 @@ google.addEventListener("click", (e) => {
       // The signed-in user info.
       const user = result.user;
       console.log(user);
-      afterLogin(user.photoURL);
+      afterLogin(user.photoURL, user.displayName, user.email);
       // ...
     })
     .catch((error) => {
