@@ -400,12 +400,11 @@
   width: 100%;
 }
 .twitter__nav-list-item-margin {
-  width: 16rem;
+  width: 20rem;
+  margin-left: -2rem;
   height: 27vh;
   display: flex;
   flex-direction: column-reverse;
-  align-items: space-around;
-  justify-content: baseline;
 }
 .display {
   display: none;
