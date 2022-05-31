@@ -1,5 +1,10 @@
 import "../scss/main.scss";
 import { Twitter } from "./All-login-pages";
+<<<<<<< HEAD
+// import { Suggested } from "./suggested";
+=======
+import * as corsModule from "cors";
+>>>>>>> fc372d34aa512ce2071cbd6574f6190d977da696
 import {
   loginScreen,
   signUpScreen,
@@ -7,8 +12,13 @@ import {
   mainPage,
 } from "./All-login-pages";
 import { initializeApp } from "firebase/app";
+<<<<<<< HEAD
+// import { getFirestore } from "firebase/firestore";
+
+=======
 import { getFirestore } from "firebase/firestore";
 // const db = getFirestore(app);
+>>>>>>> fc372d34aa512ce2071cbd6574f6190d977da696
 // import { getAnalytics } from "firebase/analytics";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
@@ -32,11 +42,18 @@ const trial = new Twitter("i love this twitter");
 trial.signUp().logIn().previousSignUP().previousLogIn();
 
 // Initialize Firebase
+<<<<<<< HEAD
+const app = initializeApp(firebaseConfig);
+// const db = getFirestore(app);
+// const test = new Suggested("khalifah", "khalifah@gmail.com");
+
+=======
 
 // app.initializeApp();
 // const cors = corsModule(options :  {CorsOptions:true});
 // const test = new Suggested("khalifah", "khalifah@gmail.com");
 
+>>>>>>> fc372d34aa512ce2071cbd6574f6190d977da696
 // test.pushInfo();
 const form = document.querySelector(".login__field-input");
 const nameField = form.name;
