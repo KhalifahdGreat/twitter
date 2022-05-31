@@ -1,6 +1,6 @@
 import "../scss/main.scss";
 import { Twitter } from "./All-login-pages";
-import { Suggested } from "./suggested";
+// import { Suggested } from "./suggested";
 import {
   loginScreen,
   signUpScreen,
@@ -8,8 +8,8 @@ import {
   mainPage,
 } from "./All-login-pages";
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-const db = getFirestore(app);
+// import { getFirestore } from "firebase/firestore";
+
 // import { getAnalytics } from "firebase/analytics";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
@@ -29,9 +29,10 @@ trial.signUp().logIn().previousSignUP().previousLogIn();
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const test = new Suggested("khalifah", "khalifah@gmail.com");
+// const db = getFirestore(app);
+// const test = new Suggested("khalifah", "khalifah@gmail.com");
 
-test.pushInfo();
+// test.pushInfo();
 const form = document.querySelector(".login__field-input");
 const nameField = form.name;
 const emailField = form.email;
