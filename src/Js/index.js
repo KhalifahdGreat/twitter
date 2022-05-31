@@ -1,6 +1,6 @@
 import "../scss/main.scss";
 import { Twitter } from "./All-login-pages";
-// import { Suggested } from "./suggested";
+
 import {
   loginScreen,
   signUpScreen,
@@ -8,28 +8,34 @@ import {
   mainPage,
 } from "./All-login-pages";
 import { initializeApp } from "firebase/app";
-// import { getFirestore } from "firebase/firestore";
-
+import { getFirestore } from "firebase/firestore";
+// const db = getFirestore(app);
 // import { getAnalytics } from "firebase/analytics";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, onValue, get, child } from "firebase/database";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAB1VyDJr8qxqBGMQ8z5gVrjVudP-dOqb4",
   authDomain: "twitter-e8f72.firebaseapp.com",
+  databaseURL: "https://twitter-e8f72-default-rtdb.firebaseio.com",
   projectId: "twitter-e8f72",
   storageBucket: "twitter-e8f72.appspot.com",
   messagingSenderId: "297476739231",
   appId: "1:297476739231:web:95351f8ebc6c4b0c3f12aa",
   measurementId: "G-Y78608EE1F",
 };
+const app = initializeApp(firebaseConfig);
+const database = getDatabase();
 const trial = new Twitter("i love this twitter");
 trial.signUp().logIn().previousSignUP().previousLogIn();
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-// const db = getFirestore(app);
+
+// app.initializeApp();
+// const cors = corsModule(options :  {CorsOptions:true});
 // const test = new Suggested("khalifah", "khalifah@gmail.com");
 
 // test.pushInfo();
@@ -83,6 +89,96 @@ const afterLogin = (photo, user, email) => {
     e.preventDefault();
     main.style.display = "none";
     suggested.style.display = "block";
+
+    // fetch("https://twitter-e8f72-default-rtdb.firebaseio.com/users", {
+    //   method: "GET",
+    //   headers: {
+    //     mode: "no-cors",
+    //     Accept: "application/json",
+    //     "Access-Control-Allow-Origin": "http://localhost:8000",
+
+    //     "Content-type": "application/json",
+    //     "Access-Control-Allow-Credentials": "true",
+    //   },
+    // })
+    //   .then((response) => {
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     console.log(data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, `users`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log(snapshot.val());
+        } else {
+          console.log("No data available");
+        }
+        let usersArr = [];
+        const objectVal = snapshot.val();
+        const arr = Object.values(objectVal);
+        const newArr = arr.filter((item) => {
+          return item.email !== email;
+        });
+        let html;
+        newArr.forEach((each) => {
+          const ul = document.querySelector(
+            ".twitter__main-suggested-user-section-list-users"
+          );
+          html = `<li
+        class="twitter__main-suggested-user-section-list-users-container"
+      >
+        <a
+          href=""
+          class="twitter__main-suggested-user-section-list-users-container-person"
+        >
+          <!-- user profile image -->
+          <div
+            class="twitter__main-suggested-user-section-list-users-container-person-container"
+          >
+            <div
+              class="twitter__main-suggested-user-section-list-users-container-person-container-profile-img"
+            ><img width="100" height="100" src="${each.photoURL}" /></div>
+            <!-- user username and email -->
+            <div
+              class="twitter__main-suggested-user-section-list-users-container-person-container-emailUsername"
+            >
+              <div
+                class="twitter__main-suggested-user-section-list-users-container-person-container-emailUsername-username"
+              >
+              ${each.userName}
+              </div>
+              <div
+                class="twitter__main-suggested-user-section-list-users-container-person-container-emailUsername-email"
+              >
+               ${each.email}
+              </div>
+            </div>
+          </div>
+
+          <!-- more -->
+          <div
+            class="ttwitter__main-suggested-user-section-list-users-container-person-btn"
+          >
+            <button
+              class="twitter__main-suggested-user-section-list-users-container-person-btn-button"
+            >
+              follow
+            </button>
+          </div>
+        </a>
+      </li>`;
+          ul.innerHTML += html;
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   });
 
   loginScreen.style.display = "none";
