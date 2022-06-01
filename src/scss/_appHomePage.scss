@@ -295,8 +295,9 @@
       }
       &-user-section {
         padding-top: 4rem;
-        padding-left: 1.5rem;
+
         &-header {
+          padding-left: 1.5rem;
           &-heading {
             text-transform: capitalize;
             font-size: 1.3rem;
@@ -304,32 +305,55 @@
           }
         }
         &-list {
+          width: 100%;
           padding-top: 2rem;
           &-users {
-            padding: 1rem 1rem;
+            width: 100%;
+            // padding: 1rem 1rem;
 
             &-container {
+              width: 100%;
               list-style-type: none;
-              margin-bottom: 1rem;
+
+              &:hover {
+                background-color: #e1e8ed;
+              }
               &-person {
                 width: 100%;
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
                 text-decoration: none;
+                padding: 1rem 1.5rem;
 
                 &-container {
-                  width: 15rem;
+                  width: 18rem;
+
                   display: flex;
                   justify-content: space-btween;
                   align-items: center;
-                  &-emailUsername-username {
-                    font-size: 1rem;
-                    color: $black;
+                  &-profile-img {
+                    width: 4rem;
+                    height: 4rem;
+                    border-radius: 50%;
+
+                    img {
+                      width: 100%;
+                      height: 100%;
+                      border-radius: 50%;
+                    }
                   }
-                  &-emailUsername-email {
-                    font-size: 0.7rem;
-                    opacity: 0.6;
-                    color: $black;
+                  &-emailUsername {
+                    margin-left: 1rem;
+                    &-username {
+                      font-size: 1rem;
+                      color: $black;
+                    }
+                    &-email {
+                      font-size: 0.7rem;
+                      opacity: 0.6;
+                      color: $black;
+                    }
                   }
                 }
                 &-btn {
@@ -340,6 +364,9 @@
                     border: none;
                     background-color: $black;
                     color: $white;
+                    &:hover {
+                      background-color: lighten($black, 20%);
+                    }
                   }
                 }
               }
