@@ -57,3 +57,26 @@ export class Twitter {
     });
   }
 }
+
+export class User {
+  constructor(email, userName, photoURL, uid, lastsignin, data) {
+    this.email = email;
+    this.userName = userName;
+    this.photoURL = photoURL;
+    this.uid = uid;
+    this.lastsignin = lastsignin;
+    this.data = data;
+  }
+
+  writeUserData() {
+    const db = getDatabase();
+    set(ref(db, "users/" + userId), {
+      email: this.email,
+      userName: this.userName,
+      photoURL: this.photoURL,
+      id: this.uid,
+      lastsignin: this.lastsignin,
+      data: this.data,
+    });
+  }
+}

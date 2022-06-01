@@ -1,5 +1,6 @@
 import "../scss/main.scss";
 import { Twitter } from "./All-login-pages";
+import { User } from "./All-login-pages";
 
 import {
   loginScreen,
@@ -15,7 +16,7 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, ref, onValue, get, child } from "firebase/database";
+import { getDatabase, ref, onValue, get, child, set } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAB1VyDJr8qxqBGMQ8z5gVrjVudP-dOqb4",
@@ -56,7 +57,7 @@ const provider = new GoogleAuthProvider();
 //   console.log(e.target.value);
 // });
 
-const afterLogin = (photo, user, email) => {
+const afterLogin = (email, user, photo) => {
   const url = "#?mainpage";
   const img = document.querySelector(
     ".twitter__nav-list-item-items-profile-img"
@@ -193,9 +194,35 @@ google.addEventListener("click", (e) => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
+      // const userPerson = new User(
+      //   user.email,
+      //   user.displayName,
+      //   user.photoURL,
+      //   user.uid,
+      //   user.metadata.lastSignInTime
+      // );
+      // console.log(userPerson);
+      // userPerson.writeUserData();
       console.log(result);
-      afterLogin(user.photoURL, user.displayName, user.email);
-      // ...
+      afterLogin(user.email, user.displayName, user.photoURL);
+
+      function writeUserData(userId, name, email, imageUrl, lastSignIn) {
+        const db = getDatabase();
+        set(ref(db, "users/" + userId), {
+          username: name,
+          email: email,
+          profile_picture: imageUrl,
+          uid: userId,
+          lastSignIn: lastSignIn,
+        });
+      }
+      writeUserData(
+        user.uid,
+        user.displayName,
+        user.email,
+        user.photoURL,
+        user.metadata.lastSignInTime
+      );
     })
     .catch((error) => {
       // Handle Errors here.
