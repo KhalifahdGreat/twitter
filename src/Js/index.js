@@ -1,6 +1,7 @@
 import "../scss/main.scss";
 import { Twitter } from "./All-login-pages";
 import { User } from "./All-login-pages";
+import { preventDoubleSuggested } from "./All-login-pages";
 
 import {
   loginScreen,
@@ -76,7 +77,9 @@ const afterLogin = (email, user, photo) => {
   );
   const main = document.querySelector(".twitter__main-page");
   const suggested = document.querySelector(".twitter__main-suggested");
-
+  const bckSuggested = document.querySelector(
+    ".twitter__main-suggested-header-container-back-icon-btn"
+  );
   console.log(img1);
   mainPage.style.display = "flex";
   window.location.href = url;
@@ -86,100 +89,22 @@ const afterLogin = (email, user, photo) => {
   img1.style.backgroundImage = `url(${photo})`;
   userName.textContent = user;
   userEmail.textContent = email;
+  bckSuggested.addEventListener("click", (e) => {
+    e.preventDefault();
+    main.style.display = "block";
+    const ul = document.querySelector(
+      ".twitter__main-suggested-user-section-list-users"
+    );
+    ul.innerHTML = "";
+    suggested.style.display = "none";
+  });
   letsGo.addEventListener("click", (e) => {
     e.preventDefault();
+
     main.style.display = "none";
     suggested.style.display = "block";
 
-    // fetch("https://twitter-e8f72-default-rtdb.firebaseio.com/users", {
-    //   method: "GET",
-    //   headers: {
-    //     mode: "no-cors",
-    //     Accept: "application/json",
-    //     "Access-Control-Allow-Origin": "http://localhost:8000",
-
-    //     "Content-type": "application/json",
-    //     "Access-Control-Allow-Credentials": "true",
-    //   },
-    // })
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    const dbRef = ref(getDatabase());
-    get(child(dbRef, `users`))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          console.log(snapshot.val());
-        } else {
-          console.log("No data available");
-        }
-        let usersArr = [];
-        const objectVal = snapshot.val();
-        const arr = Object.values(objectVal);
-        const newArr = arr.filter((item) => {
-          return item.email !== email;
-        });
-        let html;
-        newArr.forEach((each) => {
-          const ul = document.querySelector(
-            ".twitter__main-suggested-user-section-list-users"
-          );
-          html = `<li
-        class="twitter__main-suggested-user-section-list-users-container"
-      >
-        <a
-          href=""
-          class="twitter__main-suggested-user-section-list-users-container-person"
-        >
-          <!-- user profile image -->
-          <div
-            class="twitter__main-suggested-user-section-list-users-container-person-container"
-          >
-            <div
-              class="twitter__main-suggested-user-section-list-users-container-person-container-profile-img"
-            ><img width="100" height="100" src="${each.photoURL}" /></div>
-            <!-- user username and email -->
-            <div
-              class="twitter__main-suggested-user-section-list-users-container-person-container-emailUsername"
-            >
-              <div
-                class="twitter__main-suggested-user-section-list-users-container-person-container-emailUsername-username"
-              >
-              ${each.userName}
-              </div>
-              <div
-                class="twitter__main-suggested-user-section-list-users-container-person-container-emailUsername-email"
-              >
-               ${each.email}
-              </div>
-            </div>
-          </div>
-
-          <!-- more -->
-          <div
-            class="ttwitter__main-suggested-user-section-list-users-container-person-btn"
-          >
-            <button
-              class="twitter__main-suggested-user-section-list-users-container-person-btn-button"
-            >
-              follow
-            </button>
-          </div>
-        </a>
-      </li>`;
-          ul.innerHTML += html;
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    preventDoubleSuggested(email);
   });
 
   loginScreen.style.display = "none";
