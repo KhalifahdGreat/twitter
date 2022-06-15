@@ -17,8 +17,17 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, ref, onValue, get, child, set } from "firebase/database";
-
+import {
+  getDatabase,
+  ref,
+  onValue,
+  get,
+  child,
+  set,
+  push,
+  update,
+} from "firebase/database";
+import { loadFollowers } from "./tweet";
 const firebaseConfig = {
   apiKey: "AIzaSyAB1VyDJr8qxqBGMQ8z5gVrjVudP-dOqb4",
   authDomain: "twitter-e8f72.firebaseapp.com",
@@ -31,6 +40,7 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const database = getDatabase();
+let id;
 const trial = new Twitter("i love this twitter");
 trial.signUp().logIn().previousSignUP().previousLogIn();
 
@@ -49,6 +59,10 @@ const confirmPasswordField = form.confirm_password;
 const confirmPassword = document.querySelector(
   ".login__field-input-confirm-password"
 );
+const tweet = document.querySelector(
+  ".twitter__main-page-user-sub-header-btn-button"
+);
+
 const google = document.querySelector(".google-button");
 
 const auth = getAuth();
@@ -119,6 +133,7 @@ google.addEventListener("click", (e) => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
+      id = user.uid;
       // const userPerson = new User(
       //   user.email,
       //   user.displayName,
@@ -128,11 +143,19 @@ google.addEventListener("click", (e) => {
       // );
       // console.log(userPerson);
       // userPerson.writeUserData();
+
       console.log(result);
+
       afterLogin(user.email, user.displayName, user.photoURL);
 
       function writeUserData(userId, name, email, imageUrl, lastSignIn) {
         const db = getDatabase();
+        const dbRef = ref(getDatabase());
+
+        set(ref(db, "followers/" + userId), {
+          email: email,
+        });
+
         set(ref(db, "users/" + userId), {
           username: name,
           email: email,
@@ -241,3 +264,8 @@ document
 
     login();
   });
+
+tweet.addEventListener("click", (e) => {
+  e.preventDefault();
+  loadFollowers(id);
+});
