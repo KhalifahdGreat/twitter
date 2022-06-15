@@ -62,6 +62,9 @@ const confirmPassword = document.querySelector(
 const tweet = document.querySelector(
   ".twitter__main-page-user-sub-header-btn-button"
 );
+const follow = document.querySelector(
+  ".twitter__main-suggested-user-section-list-users-container-person-btn-button"
+);
 
 const google = document.querySelector(".google-button");
 
@@ -143,7 +146,24 @@ google.addEventListener("click", (e) => {
       // );
       // console.log(userPerson);
       // userPerson.writeUserData();
+      const db = getDatabase();
+      const dbRef = ref(getDatabase());
 
+      get(child(dbRef, `followers/${id}`))
+        .then((snapshot) => {
+          // console.log(snapshot.val());
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+          } else {
+            set(ref(db, "followers/" + id), {
+              usr_email: user.email,
+            });
+            console.log("No data available");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
       console.log(result);
 
       afterLogin(user.email, user.displayName, user.photoURL);
@@ -151,10 +171,6 @@ google.addEventListener("click", (e) => {
       function writeUserData(userId, name, email, imageUrl, lastSignIn) {
         const db = getDatabase();
         const dbRef = ref(getDatabase());
-
-        set(ref(db, "followers/" + userId), {
-          email: email,
-        });
 
         set(ref(db, "users/" + userId), {
           username: name,
@@ -268,4 +284,13 @@ document
 tweet.addEventListener("click", (e) => {
   e.preventDefault();
   loadFollowers(id);
+});
+const ul = document.querySelector(
+  ".twitter__main-suggested-user-section-list-users"
+);
+ul.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (e.target.tagName === "BUTTON") {
+    // access the user email using event.target.children*4
+  }
 });
