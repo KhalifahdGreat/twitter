@@ -149,6 +149,22 @@ google.addEventListener("click", (e) => {
       const db = getDatabase();
       const dbRef = ref(getDatabase());
 
+      get(child(dbRef, `tweets/${id}`))
+        .then((snapshot) => {
+          // console.log(snapshot.val());
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+          } else {
+            set(ref(db, "tweets/" + id), {
+              usr_email: user.email,
+            });
+            console.log("No data available");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
       get(child(dbRef, `followers/${id}`))
         .then((snapshot) => {
           // console.log(snapshot.val());
@@ -283,14 +299,36 @@ document
 
 tweet.addEventListener("click", (e) => {
   e.preventDefault();
-  loadFollowers(id);
+
+  let message = document.querySelector(
+    ".twitter__main-page-user-icon-event-message-input"
+  );
+
+  loadFollowers(id, message.value);
+  message.value = "";
 });
 const ul = document.querySelector(
   ".twitter__main-suggested-user-section-list-users"
 );
 ul.addEventListener("click", (e) => {
   e.preventDefault();
+  console.log(e);
   if (e.target.tagName === "BUTTON") {
-    // access the user email using event.target.children*4
+    let email =
+      e.target.parentElement.parentElement.children[0].children[1].children[1]
+        .innerText;
+    console.log(email);
+    const db = getDatabase();
+    const dbRef = ref(getDatabase());
+
+    set(
+      ref(
+        db,
+        `followers/${id}` + `/${id}${Math.floor(Math.random() * 10000000)}`
+      ),
+      {
+        usr_email: email,
+      }
+    );
   }
 });
