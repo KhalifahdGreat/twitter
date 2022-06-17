@@ -28,6 +28,7 @@ import {
   update,
 } from "firebase/database";
 import { loadFollowers } from "./tweet";
+import { loadTweets } from "./tweet";
 const firebaseConfig = {
   apiKey: "AIzaSyAB1VyDJr8qxqBGMQ8z5gVrjVudP-dOqb4",
   authDomain: "twitter-e8f72.firebaseapp.com",
@@ -153,7 +154,6 @@ google.addEventListener("click", (e) => {
         .then((snapshot) => {
           // console.log(snapshot.val());
           if (snapshot.exists()) {
-            console.log(snapshot.val());
           } else {
             set(ref(db, "tweets/" + id), {
               usr_email: user.email,
@@ -169,7 +169,6 @@ google.addEventListener("click", (e) => {
         .then((snapshot) => {
           // console.log(snapshot.val());
           if (snapshot.exists()) {
-            console.log(snapshot.val());
           } else {
             set(ref(db, "followers/" + id), {
               usr_email: user.email,
@@ -180,7 +179,6 @@ google.addEventListener("click", (e) => {
         .catch((error) => {
           console.error(error);
         });
-      console.log(result);
 
       afterLogin(user.email, user.displayName, user.photoURL);
 
@@ -296,7 +294,18 @@ document
 
     login();
   });
-
+// let mesage = document.querySelector(
+//   ".twitter__main-page-user-icon-event-message-input"
+// );
+// mesage.addEventListener("keypress", (e) => {
+//   e.preventDefault();
+//   console.log(e);
+//   if (e.key === "Enter") {
+//     let msg = e.target.value();
+//     loadFollowers(id, msg);
+//     msg.value = "";
+//   }
+// });
 tweet.addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -306,13 +315,44 @@ tweet.addEventListener("click", (e) => {
 
   loadFollowers(id, message.value);
   message.value = "";
+  const dbRef = ref(getDatabase());
+  loadTweets(id);
+  // get the user's own tweet
+  // get(child(dbRef, `tweets/${id}`))
+  //   .then((snapshot) => {
+  //     // console.log(snapshot.val());
+  //     if (snapshot.exists()) {
+  //       console.log(snapshot.val());
+  //     } else {
+  //       console.log("No data available");
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   });
+  // // get the users followers tweets
+  // get(child(dbRef, `followers/${id}`))
+  //   .then((snapshot) => {
+  //     // console.log(snapshot.val());
+  //     if (snapshot.exists()) {
+  //       console.log(snapshot.val());
+  //       const objectVal = snapshot.val();
+
+  //       const arr = Object.values(objectVal);
+  //       console.log(arr);
+  //     } else {
+  //       console.log("No data available");
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   });
 });
 const ul = document.querySelector(
   ".twitter__main-suggested-user-section-list-users"
 );
 ul.addEventListener("click", (e) => {
   e.preventDefault();
-  console.log(e);
   if (e.target.tagName === "BUTTON") {
     let email =
       e.target.parentElement.parentElement.children[0].children[1].children[1]
