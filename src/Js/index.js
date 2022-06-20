@@ -93,11 +93,19 @@ const afterLogin = (email, user, photo) => {
   const letsGo = document.querySelector(
     ".twitter__main-page-content-intro-btn-button"
   );
+  const explore = document.querySelectorAll(".twitter__nav-list-item-hover");
+  const exploreIcon = document.querySelectorAll(".twitter__nav-list-item-icon");
+  const exploreLink = document.querySelectorAll(
+    ".twitter__nav-list-item-text-container-link"
+  );
   const main = document.querySelector(".twitter__main-page");
   const suggested = document.querySelector(".twitter__main-suggested");
   const bckSuggested = document.querySelector(
     ".twitter__main-suggested-header-container-back-icon-btn"
   );
+  const home = document.querySelector(".home");
+  const homeIcon = document.querySelector(".homeIcon");
+  const homeLink = document.querySelector(".homeLink");
   console.log(img1);
   mainPage.style.display = "flex";
   window.location.href = url;
@@ -123,6 +131,40 @@ const afterLogin = (email, user, photo) => {
     suggested.style.display = "block";
 
     preventDoubleSuggested(email);
+  });
+  explore.forEach((explore) => {
+    explore.addEventListener("click", (e) => {
+      console.log("explore");
+      suggested.style.display = "block";
+      main.style.display = "none";
+      preventDoubleSuggested(email);
+    });
+  });
+
+  exploreIcon.forEach((exploreIcon) => {
+    exploreIcon.addEventListener("click", (e) => {
+      e.preventDefault();
+    });
+  });
+  exploreLink.forEach((exploreLink) => {
+    exploreLink.addEventListener("click", (e) => {
+      e.preventDefault();
+    });
+  });
+  home.addEventListener("click", () => {
+    main.style.display = "block";
+    const ul = document.querySelector(
+      ".twitter__main-suggested-user-section-list-users"
+    );
+    ul.innerHTML = "";
+    suggested.style.display = "none";
+  });
+  homeLink.addEventListener("click", (e) => {
+    e.preventDefault();
+  });
+
+  homeIcon.addEventListener("click", (e) => {
+    e.preventDefault();
   });
 
   loginScreen.style.display = "none";
@@ -154,6 +196,10 @@ google.addEventListener("click", (e) => {
         .then((snapshot) => {
           // console.log(snapshot.val());
           if (snapshot.exists()) {
+            const vanishLetsGo = document.querySelector(
+              ".twitter__main-page-content-intro"
+            );
+            vanishLetsGo.style.display = "none";
           } else {
             set(ref(db, "tweets/" + id), {
               usr_email: user.email,
@@ -207,7 +253,7 @@ google.addEventListener("click", (e) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       // The email of the user's account used.
-      const email = error.customData.email;
+      // const email = error.customData.email;
       // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
       // ...

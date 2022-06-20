@@ -38,6 +38,7 @@ export const loadTweets = (id) => {
   let userArr;
   let idArr = [];
   let totalTweets;
+  let overallTweets = [];
   const dbRef = ref(getDatabase());
   get(child(dbRef, `tweets/${id}`))
     .then((snapshot) => {
@@ -91,7 +92,17 @@ export const loadTweets = (id) => {
                   } else {
                     console.log("no tweet available");
                   }
+                  for (let l = 0; l < totalTweets.length; l++) {
+                    if (
+                      totalTweets[l].message &&
+                      totalTweets[l].message !== ""
+                    ) {
+                      overallTweets.push(totalTweets[l].message);
+                    }
+                  }
                   console.log(totalTweets);
+
+                  console.log(overallTweets);
                 });
               } else {
                 console.log("No data available");
