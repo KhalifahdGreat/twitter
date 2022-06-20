@@ -32,7 +32,7 @@ export const loadFollowers = (userid, message) => {
   );
 };
 
-export const loadTweets = (id) => {
+export const loadTweets = (id, image, user, email) => {
   let tweetsArr;
   let followersArr;
   let userArr;
@@ -103,6 +103,42 @@ export const loadTweets = (id) => {
                   console.log(totalTweets);
 
                   console.log(overallTweets);
+                  let html;
+                  overallTweets.forEach((tweet) => {
+                    const ul = document.querySelector(
+                      ".twitter__main-page-content-messages"
+                    );
+                    html = `
+                   <li class="twitter__main-page-content-messages-item">
+                <div class="twitter__main-page-content-messages-item-userIcon">
+                  <img src="${image}" width="" />
+                </div>
+                <div
+                  class="twitter__main-page-content-messages-item-second-item"
+                >
+                  <h1
+                    class="twitter__main-page-content-messages-item-second-item-name"
+                  >
+                    ${user}
+                  </h1>
+                  <h2
+                    class="witter__main-page-content-messages-item-second-item-email"
+                  >
+                    ${email}
+                  </h2>
+                  <div
+                    class="twitter__main-page-content-messages-item-second-item-messsage"
+                  >
+                    <p
+                      class="twitter__main-page-content-messages-item-second-item-messsage-text"
+                    >
+                      ${tweet}
+                    </p>
+                  </div>
+                </div>
+              </li>`;
+                    ul.innerHTML += html;
+                  });
                 });
               } else {
                 console.log("No data available");

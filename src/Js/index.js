@@ -42,6 +42,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase();
 let id;
+let photoURL;
+let userName;
+let email;
 const trial = new Twitter("i love this twitter");
 trial.signUp().logIn().previousSignUP().previousLogIn();
 
@@ -179,7 +182,13 @@ google.addEventListener("click", (e) => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
+      console.log(user);
+
       id = user.uid;
+      userName = user.displayName;
+      photoURL = user.photoURL;
+      email = user.email;
+
       // const userPerson = new User(
       //   user.email,
       //   user.displayName,
@@ -200,6 +209,7 @@ google.addEventListener("click", (e) => {
               ".twitter__main-page-content-intro"
             );
             vanishLetsGo.style.display = "none";
+            loadTweets(id, photoURL, userName, email);
           } else {
             set(ref(db, "tweets/" + id), {
               usr_email: user.email,
@@ -362,7 +372,7 @@ tweet.addEventListener("click", (e) => {
   loadFollowers(id, message.value);
   message.value = "";
   const dbRef = ref(getDatabase());
-  loadTweets(id);
+  loadTweets(id, photoURL, userName, email);
   // get the user's own tweet
   // get(child(dbRef, `tweets/${id}`))
   //   .then((snapshot) => {
