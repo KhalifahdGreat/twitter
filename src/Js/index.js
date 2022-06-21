@@ -131,12 +131,17 @@ const afterLogin = (email, user, photo) => {
     e.preventDefault();
 
     main.style.display = "none";
+
     suggested.style.display = "block";
 
     preventDoubleSuggested(email);
   });
   explore.forEach((explore) => {
     explore.addEventListener("click", (e) => {
+      const ul = document.querySelector(
+        ".twitter__main-suggested-user-section-list-users"
+      );
+      ul.innerHTML = "";
       console.log("explore");
       suggested.style.display = "block";
       main.style.display = "none";
@@ -363,13 +368,15 @@ document
 //   }
 // });
 tweet.addEventListener("click", (e) => {
+  const ul = document.querySelector(".twitter__main-page-content-messages");
+  ul.innerHTML = "";
   e.preventDefault();
 
   let message = document.querySelector(
     ".twitter__main-page-user-icon-event-message-input"
   );
 
-  loadFollowers(id, message.value);
+  loadFollowers(id, message.value, email, photoURL, userName);
   message.value = "";
   const dbRef = ref(getDatabase());
   loadTweets(id, photoURL, userName, email);

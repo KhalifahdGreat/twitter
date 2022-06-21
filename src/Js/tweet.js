@@ -1,6 +1,6 @@
 import { getDatabase, ref, onValue, get, child, set } from "firebase/database";
 
-export const loadFollowers = (userid, message) => {
+export const loadFollowers = (userid, message, email, photoURL, user) => {
   let fm = getDatabase();
 
   const dbRef = ref(getDatabase());
@@ -18,7 +18,7 @@ export const loadFollowers = (userid, message) => {
   // });
 
   const db = getDatabase();
-  const now = new Date();
+  const now = Date.now();
 
   set(
     ref(
@@ -28,6 +28,9 @@ export const loadFollowers = (userid, message) => {
     {
       message: message,
       created_at: now,
+      email: email,
+      photoURL: photoURL,
+      user: user,
     }
   );
 };
@@ -46,6 +49,7 @@ export const loadTweets = (id, image, user, email) => {
       if (snapshot.exists()) {
         let tweets = snapshot.val();
         tweetsArr = Object.values(tweets);
+        totalTweets = tweetsArr;
         console.log(tweetsArr);
         get(child(dbRef, `followers/${id}`)).then((snapshot) => {
           // console.log(snapshot.val());
@@ -97,13 +101,14 @@ export const loadTweets = (id, image, user, email) => {
                       totalTweets[l].message &&
                       totalTweets[l].message !== ""
                     ) {
-                      overallTweets.push(totalTweets[l].message);
+                      overallTweets.push(totalTweets[l]);
                     }
                   }
                   console.log(totalTweets);
 
                   console.log(overallTweets);
                   let html;
+
                   overallTweets.forEach((tweet) => {
                     const ul = document.querySelector(
                       ".twitter__main-page-content-messages"
@@ -111,7 +116,7 @@ export const loadTweets = (id, image, user, email) => {
                     html = `
                    <li class="twitter__main-page-content-messages-item">
                 <div class="twitter__main-page-content-messages-item-userIcon">
-                  <img src="${image}" width="" />
+                  <img src="${tweet.photoURL}" width="" />
                 </div>
                 <div
                   class="twitter__main-page-content-messages-item-second-item"
@@ -119,12 +124,12 @@ export const loadTweets = (id, image, user, email) => {
                   <h1
                     class="twitter__main-page-content-messages-item-second-item-name"
                   >
-                    ${user}
+                    ${tweet.user}
                   </h1>
                   <h2
                     class="witter__main-page-content-messages-item-second-item-email"
                   >
-                    ${email}
+                    ${tweet.email}
                   </h2>
                   <div
                     class="twitter__main-page-content-messages-item-second-item-messsage"
@@ -132,7 +137,7 @@ export const loadTweets = (id, image, user, email) => {
                     <p
                       class="twitter__main-page-content-messages-item-second-item-messsage-text"
                     >
-                      ${tweet}
+                      ${tweet.message}
                     </p>
                   </div>
                 </div>
