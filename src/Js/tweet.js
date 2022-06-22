@@ -206,7 +206,7 @@ export const loadTweets = (id, image, user, email) => {
     });
   idArr.forEach((tweet) => {
     const db = getDatabase();
-    const starCountRef = ref(db, `tweets/${tweet}`);
+    const starCountRef = ref(db, "tweet/" + tweet);
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       console.log(data);
