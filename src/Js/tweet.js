@@ -42,6 +42,32 @@ export const loadTweets = (id, image, user, email) => {
   let idArr = [];
   let totalTweets;
   let overallTweets = [];
+  let followerTweet;
+  let fllowerTweetArr = [];
+  // const recursive = (num) => {
+  //   if (num === idArr.length - 1) {
+  //     get(child(dbRef, `tweets/${idArr[num]}`)).then((snapshot) => {
+  //       if (snapshot.exists()) {
+  //         totalTweets = totalTweets.concat(Object.values(snapshot.val()));
+  //       } else {
+  //         console.log("no data");
+  //       }
+  //     });
+
+  //     return;
+  //   } else {
+  //     get(child(dbRef, `tweets/${idArr[num]}`)).then((snapshot) => {
+  //       if (snapshot.exists()) {
+  //         totalTweets = totalTweets.concat(Object.values(snapshot.val()));
+  //       } else {
+  //         console.log("no data");
+  //       }
+  //     });
+  //     console.log(totalTweets);
+
+  //     recursive(num++);
+  //   }
+  // };
   const dbRef = ref(getDatabase());
   get(child(dbRef, `tweets/${id}`))
     .then((snapshot) => {
@@ -74,28 +100,44 @@ export const loadTweets = (id, image, user, email) => {
                   }
                 }
                 console.log(idArr);
+                idArr.forEach((tweet) => {
+                  get(child(dbRef, `tweets/${tweet}`)).then((snapshot) => {
+                    totalTweets = totalTweets.concat(
+                      Object.values(snapshot.val())
+                    );
+                  });
+                });
 
                 get(child(dbRef, `tweets/${idArr[0]}`)).then((snapshot) => {
-                  if (snapshot.exists()) {
-                    let objextVal = snapshot.val();
-                    let objextValArr = Object.values(objextVal);
-                    totalTweets = tweetsArr.concat(objextValArr);
-                    for (let k = 1; k < idArr.length; k++) {
-                      get(child(dbRef, `tweets/${idArr[k]}`)).then(
-                        (snapshot) => {
-                          if (snapshot.exists()) {
-                            totalTweets = totalTweets.concat(
-                              Object.values(snapshot.val())
-                            );
-                          } else {
-                            console.log("no data");
-                          }
-                        }
-                      );
-                    }
-                  } else {
-                    console.log("no tweet available");
-                  }
+                  // if (snapshot.exists()) {
+                  //   let objextVal = snapshot.val();
+                  //   let objextValArr = Object.values(objextVal);
+                  //   console.log(objextValArr);
+                  //   // totalTweets = totalTweets.concat(objextValArr);
+                  //   console.log(totalTweets);
+                  //   for (let k = 1; k < idArr.length; k++) {
+                  //     console.log(k);
+                  //     get(child(dbRef, `tweets/${idArr[k]}`)).then(
+                  //       (snapshot) => {
+                  //         followerTweet = Object.values(snapshot.val());
+                  //       }
+                  //     );
+                  //     console.log(totalTweets);
+                  //   }
+                  //   console.log(totalTweets);
+                  // } else {
+                  //   for (let k = 1; k < idArr.length; k++) {
+                  //     get(child(dbRef, `tweets/${idArr[k]}`)).then(
+                  //       (snapshot) => {
+                  //         // totalTweets = totalTweets.concat(
+                  //         //   Object.values(snapshot.val())
+                  //         // );
+                  //       }
+                  //     );
+                  //     console.log(totalTweets);
+                  //   }
+                  //   console.log("no tweet available");
+                  // }
                   for (let l = 0; l < totalTweets.length; l++) {
                     if (
                       totalTweets[l].message &&
@@ -105,7 +147,13 @@ export const loadTweets = (id, image, user, email) => {
                     }
                   }
                   console.log(totalTweets);
-
+                  console.log(
+                    overallTweets.sort((a, b) => {
+                      return new Date(a.created_at) < new Date(b.created_at)
+                        ? 1
+                        : -1;
+                    })
+                  );
                   console.log(overallTweets);
                   let html;
 
