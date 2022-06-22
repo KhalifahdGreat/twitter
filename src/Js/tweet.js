@@ -44,6 +44,7 @@ export const loadTweets = (id, image, user, email) => {
   let overallTweets = [];
   let followerTweet;
   let fllowerTweetArr = [];
+  let snapshotStateArr;
   // const recursive = (num) => {
   //   if (num === idArr.length - 1) {
   //     get(child(dbRef, `tweets/${idArr[num]}`)).then((snapshot) => {
@@ -105,6 +106,22 @@ export const loadTweets = (id, image, user, email) => {
                     totalTweets = totalTweets.concat(
                       Object.values(snapshot.val())
                     );
+                  });
+                });
+                idArr.forEach((tweet) => {
+                  const db = getDatabase();
+                  const starCountRef = ref(db, `tweets/${tweet}`);
+                  onValue(starCountRef, (snapshot) => {
+                    const data = snapshot.val();
+                    snapshotStateArr = Object.values(data);
+                    snapshotStateArr.sort((a, b) => {
+                      return new Date(a.created_at) < new Date(b.created_at)
+                        ? 1
+                        : -1;
+                    });
+                    overallTweets.push(snapshotStateArr[0]);
+
+                    console.log(data);
                   });
                 });
 
@@ -204,13 +221,5 @@ export const loadTweets = (id, image, user, email) => {
     .catch((error) => {
       console.error(error);
     });
-  idArr.forEach((tweet) => {
-    const db = getDatabase();
-    const starCountRef = ref(db, "tweet/" + tweet);
-    onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
-      console.log(data);
-    });
-  });
 };
 // get the users followers tweets
