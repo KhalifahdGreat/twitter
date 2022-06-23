@@ -13,20 +13,22 @@
     width: 25%;
     height: 100vh;
     display: flex;
-    // justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
     align-items: center;
+    position: fixed;
+    background-color: rgba(255, 255, 255, 1);
     &-list {
       width: 100%;
       display: flex;
       flex-direction: column;
-      height: 70vh;
+      // height: 70vh;
       &-item {
         width: 100%;
         display: flex;
         align-items: center;
         list-style-type: none;
-        padding: 0rem 2rem;
+        // padding: 0rem 2rem;
         transition: all 0.5s;
         &-container {
           display: flex;
@@ -34,6 +36,15 @@
           padding: 1rem 1rem;
         }
         &-hover {
+          display: flex;
+          border-radius: 2rem;
+          padding: 1rem 1.5rem;
+          &:hover {
+            background-color: #e1e8ed;
+          }
+        }
+        &-ontop {
+          width: 100%;
           display: flex;
           border-radius: 2rem;
           padding: 1rem 1.5rem;
@@ -58,7 +69,7 @@
         }
         &-btn {
           border: none;
-          padding: 0.8rem 5.3rem;
+          padding: 5% 25%;
           border-radius: 2rem;
           background-color: $dark-primary-color;
           color: $white;
@@ -73,7 +84,7 @@
         &-items {
           width: 100%;
           display: flex;
-          justify-content: space-between;
+          justify-content: space-around;
           align-items: center;
           text-decoration: none;
 
@@ -112,14 +123,14 @@
     width: 45%;
     border-left: 2px solid rgba(224, 224, 224, 0.3);
     border-right: 2px solid rgba(224, 224, 224, 0.3);
+    margin-left: 25%;
 
     &-page {
       width: 100%;
-      height: 100vh;
+      background-color: rgba(255, 255, 255, 1);
 
       &-heading {
         padding: 1rem 1rem;
-
         width: 100%;
         border-bottom: 2px solid rgba(224, 224, 224, 0.3);
 
@@ -229,7 +240,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 70%;
+        // height: 70%;
 
         &-intro {
           &-heading {
@@ -262,6 +273,7 @@
           }
         }
         &-messages {
+          width: 100%;
           height: 100%;
           overflow: scroll;
           &::-webkit-scrollbar {
@@ -295,7 +307,8 @@
               padding-left: 2rem;
 
               &-name {
-                font-weight: 300;
+                font-weight: 200;
+                font-size: 1rem;
               }
             }
             &:hover {
@@ -305,9 +318,21 @@
         }
       }
     }
+    .witter__main-page-content-messages-item-second-item-email {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgb(188, 188, 188);
+    }
+    .twitter__main-page-content-messages-item-second-item-messsage-text {
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: #3a3b3c;
+      padding-top: 1rem;
+    }
     &-suggested {
       width: 100%;
-
+      background-color: rgba(255, 255, 255, 1);
       &-header-container {
         width: 44.8%;
         height: 3rem;
@@ -316,18 +341,19 @@
       }
       &-header-container-back {
         display: flex;
-        width: 11rem;
+        width: 100%;
         height: 100%;
         padding: 1.5rem;
-        justify-content: space-between;
         align-items: center;
-
+        z-index: 999;
+        background-color: rgba(255, 255, 255, 1);
         &-icon {
           &-btn {
             color: $black;
             font-size: 1rem;
           }
           &-heading {
+            padding-left: 1rem;
             &-text {
               font-size: 1.2rem;
               font-weight: 500;
@@ -353,11 +379,11 @@
           padding-top: 2rem;
           &-users {
             width: 100%;
-            height: 85vh;
-            overflow: scroll;
-            &::-webkit-scrollbar {
-              display: none;
-            }
+            // height: 85vh;
+            // overflow: scroll;
+            // &::-webkit-scrollbar {
+            //   display: none;
+            // }
             // padding: 1rem 1rem;
 
             &-container {
@@ -429,8 +455,11 @@
   &__trend {
     padding-left: 2rem;
     padding-top: 0.3rem;
-
+    margin-left: 70%;
     width: 30%;
+    height: 100vh;
+    position: fixed;
+    background-color: rgba(255, 255, 255, 1);
     &-page {
       overflow: hidden;
       &-search-bar {
@@ -447,7 +476,7 @@
         }
         &-input {
           border: none;
-          width: 20rem;
+          width: 25rem;
           height: 2.5rem;
           padding-top: 0.2rem;
           padding-left: 3rem;
@@ -466,7 +495,7 @@
       }
 
       &-trends {
-        width: 20rem;
+        width: 25rem;
         margin-top: 1rem;
 
         background-color: #f5f8fa;
@@ -480,7 +509,7 @@
           margin-bottom: 1rem;
         }
         &-list {
-          height: 73vh;
+          height: 75vh;
           overflow: scroll;
           &::-webkit-scrollbar {
             display: none;
@@ -553,7 +582,7 @@
 .logo-bird {
   color: $dark-primary-color;
   font-size: 1.8rem;
-  width: 15rem;
+  // width: 15rem;
   margin: 0 auto;
   // margin-bottom: 0.5rem;
   &:hover {
@@ -562,13 +591,16 @@
 }
 .width {
   width: 100%;
+  margin-top: 2rem;
 }
 .twitter__nav-list-item-margin {
-  width: 20rem;
+  width: 100%;
   margin-left: -2rem;
-  height: 28vh;
+  // height: 28vh;
   display: flex;
-  flex-direction: column-reverse;
+  // flex-direction: column-reverse;
+
+  padding-bottom: 1rem;
 }
 .display {
   display: none;
