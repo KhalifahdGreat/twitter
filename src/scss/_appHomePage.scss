@@ -84,7 +84,7 @@
         &-items {
           width: 100%;
           display: flex;
-          justify-content: space-around;
+          justify-content: space-between;
           align-items: center;
           text-decoration: none;
 
@@ -98,6 +98,7 @@
             border-radius: 50%;
           }
           &-emailUsername {
+            width: 80%;
             &-username {
               color: $black;
               font-size: 0.8rem;
@@ -307,7 +308,7 @@
               padding-left: 2rem;
 
               &-name {
-                font-weight: 200;
+                font-weight: 400;
                 font-size: 1rem;
               }
             }
@@ -320,7 +321,7 @@
     }
     .witter__main-page-content-messages-item-second-item-email {
       font-size: 0.7rem;
-      font-weight: 600;
+      font-weight: 200;
       padding-bottom: 0.4rem;
       border-bottom: 1px solid rgb(188, 188, 188);
     }
@@ -476,7 +477,7 @@
         }
         &-input {
           border: none;
-          width: 25rem;
+          width: 22rem;
           height: 2.5rem;
           padding-top: 0.2rem;
           padding-left: 3rem;
@@ -495,7 +496,7 @@
       }
 
       &-trends {
-        width: 25rem;
+        width: 22rem;
         margin-top: 1rem;
 
         background-color: #f5f8fa;
@@ -509,7 +510,7 @@
           margin-bottom: 1rem;
         }
         &-list {
-          height: 75vh;
+          height: 70vh;
           overflow: scroll;
           &::-webkit-scrollbar {
             display: none;
@@ -594,7 +595,6 @@
   margin-top: 2rem;
 }
 .twitter__nav-list-item-margin {
-  width: 100%;
   margin-left: -2rem;
   // height: 28vh;
   display: flex;
