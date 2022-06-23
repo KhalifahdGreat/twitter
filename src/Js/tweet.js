@@ -114,12 +114,13 @@ export const loadTweets = (id, image, user, email) => {
                   onValue(starCountRef, (snapshot) => {
                     const data = snapshot.val();
                     snapshotStateArr = Object.values(data);
+                    console.log(snapshotStateArr);
                     snapshotStateArr.sort((a, b) => {
                       return new Date(a.created_at) < new Date(b.created_at)
                         ? 1
                         : -1;
                     });
-                    overallTweets.push(snapshotStateArr[0]);
+                    overallTweets.push(snapshotStateArr[1]);
 
                     console.log(data);
                   });

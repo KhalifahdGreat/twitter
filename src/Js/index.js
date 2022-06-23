@@ -41,10 +41,10 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const database = getDatabase();
-let id;
-let photoURL;
-let userName;
-let email;
+export let id;
+export let photoURL;
+export let userName;
+export let email;
 const trial = new Twitter("i love this twitter");
 trial.signUp().logIn().previousSignUP().previousLogIn();
 
