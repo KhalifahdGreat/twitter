@@ -204,8 +204,9 @@ export const loadTweets = (id, image, user, email) => {
                     onValue(starCountRef, (snapshot) => {
                       const data = snapshot.val();
                       snapshotStateArr = Object.values(data);
+                      console.log(snapshotStateArr);
+                      snapshotStateArr.shift(snapshotStateArr[0]);
 
-                      snapshotStateArr.pop(snapshotStateArr[0]);
                       console.log(snapshotStateArr);
                       snapshotStateArr.sort((a, b) => {
                         return new Date(a.created_at) < new Date(b.created_at)
@@ -213,8 +214,12 @@ export const loadTweets = (id, image, user, email) => {
                           : -1;
                       });
                       console.log(snapshotStateArr[0]);
-                      overallTweets.push(snapshotStateArr[0]);
+                      overallTweets.push(snapshotStateArr[1]);
                       console.log(overallTweets);
+                      let index = 1;
+                      if (index > -1) {
+                        overallTweets.splice(index, 1);
+                      }
                       overallTweets.sort((a, b) => {
                         return new Date(a.created_at) < new Date(b.created_at)
                           ? 1
@@ -252,36 +257,43 @@ export const loadTweets = (id, image, user, email) => {
                       // ul.innerHTML += lihtml;
                       ul.innerHTML = "";
                       overallTweets.forEach((tweet) => {
-                        html = `
-                       <li class="twitter__main-page-content-messages-item">
-                    <div class="twitter__main-page-content-messages-item-userIcon">
-                      <img src="${tweet.photoURL}" width="" />
-                    </div>
-                    <div
-                      class="twitter__main-page-content-messages-item-second-item"
-                    >
-                      <h1
-                        class="twitter__main-page-content-messages-item-second-item-name"
-                      >
-                        ${tweet.user}
-                      </h1>
-                      <h2
-                        class="witter__main-page-content-messages-item-second-item-email"
-                      >
-                        ${tweet.email}
-                      </h2>
-                      <div
-                        class="twitter__main-page-content-messages-item-second-item-messsage"
-                      >
-                        <p
-                          class="twitter__main-page-content-messages-item-second-item-messsage-text"
-                        >
-                          ${tweet.message}
-                        </p>
-                      </div>
-                    </div>
-                  </li>`;
-                        ul.innerHTML += html;
+                        if (
+                          tweet.user !== undefined &&
+                          tweet.email !== undefined &&
+                          tweet.photoURL !== undefined &&
+                          tweet.message !== undefined
+                        ) {
+                          html = `
+                          <li class="twitter__main-page-content-messages-item">
+                       <div class="twitter__main-page-content-messages-item-userIcon">
+                         <img src="${tweet.photoURL}" width="" />
+                       </div>
+                       <div
+                         class="twitter__main-page-content-messages-item-second-item"
+                       >
+                         <h1
+                           class="twitter__main-page-content-messages-item-second-item-name"
+                         >
+                           ${tweet.user}
+                         </h1>
+                         <h2
+                           class="witter__main-page-content-messages-item-second-item-email"
+                         >
+                           ${tweet.email}
+                         </h2>
+                         <div
+                           class="twitter__main-page-content-messages-item-second-item-messsage"
+                         >
+                           <p
+                             class="twitter__main-page-content-messages-item-second-item-messsage-text"
+                           >
+                             ${tweet.message}
+                           </p>
+                         </div>
+                       </div>
+                     </li>`;
+                          ul.innerHTML += html;
+                        }
                       });
                       console.log(data);
                     });
