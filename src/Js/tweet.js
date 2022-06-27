@@ -45,6 +45,10 @@ export const loadTweets = (id, image, user, email) => {
   let followerTweet;
   let fllowerTweetArr = [];
   let snapshotStateArr;
+  let currentStateArr = [];
+  let lihtml;
+  let html;
+  const ul = document.querySelector(".twitter__main-page-content-messages");
   // const recursive = (num) => {
   //   if (num === idArr.length - 1) {
   //     get(child(dbRef, `tweets/${idArr[num]}`)).then((snapshot) => {
@@ -108,23 +112,42 @@ export const loadTweets = (id, image, user, email) => {
                     );
                   });
                 });
-                idArr.forEach((tweet) => {
-                  const db = getDatabase();
-                  const starCountRef = ref(db, `tweets/${tweet}`);
-                  onValue(starCountRef, (snapshot) => {
-                    const data = snapshot.val();
-                    snapshotStateArr = Object.values(data);
-                    console.log(snapshotStateArr);
-                    snapshotStateArr.sort((a, b) => {
-                      return new Date(a.created_at) < new Date(b.created_at)
-                        ? 1
-                        : -1;
-                    });
-                    overallTweets.push(snapshotStateArr[1]);
+                // idArr.forEach((tweet) => {
+                //   console.log(totalTweets);
+                //   const db = getDatabase();
+                //   const starCountRef = ref(db, `tweets/${tweet}`);
+                //   onValue(starCountRef, (snapshot) => {
+                //     const data = snapshot.val();
+                //     snapshotStateArr = Object.values(data);
 
-                    console.log(data);
-                  });
-                });
+                //     snapshotStateArr.pop(snapshotStateArr[0]);
+                //     console.log(snapshotStateArr);
+                //     snapshotStateArr.sort((a, b) => {
+                //       return new Date(a.created_at) < new Date(b.created_at)
+                //         ? 1
+                //         : -1;
+                //     });
+                //     console.log(snapshotStateArr[0]);
+                //     totalTweets.push(snapshotStateArr[0]);
+                //     for (let l = 0; l < totalTweets.length; l++) {
+                //       if (
+                //         totalTweets[l].message &&
+                //         totalTweets[l].message !== "" &&
+                //         totalTweets[l] !== undefined
+                //       ) {
+                //         currentStateArr.push(totalTweets[l]);
+                //       }
+                //     }
+                //     currentStateArr.sort((a, b) => {
+                //       return new Date(a.created_at) < new Date(b.created_at)
+                //         ? 1
+                //         : -1;
+                //     });
+                //     console.log(currentStateArr);
+
+                //     console.log(data);
+                //   });
+                // });
 
                 get(child(dbRef, `tweets/${idArr[0]}`)).then((snapshot) => {
                   // if (snapshot.exists()) {
@@ -159,26 +182,114 @@ export const loadTweets = (id, image, user, email) => {
                   for (let l = 0; l < totalTweets.length; l++) {
                     if (
                       totalTweets[l].message &&
-                      totalTweets[l].message !== ""
+                      totalTweets[l].message !== "" &&
+                      totalTweets[l] !== undefined
                     ) {
                       overallTweets.push(totalTweets[l]);
                     }
                   }
                   console.log(totalTweets);
-                  console.log(
-                    overallTweets.sort((a, b) => {
-                      return new Date(a.created_at) < new Date(b.created_at)
-                        ? 1
-                        : -1;
-                    })
-                  );
-                  console.log(overallTweets);
-                  let html;
 
+                  overallTweets.sort((a, b) => {
+                    return new Date(a.created_at) < new Date(b.created_at)
+                      ? 1
+                      : -1;
+                  });
+
+                  console.log(overallTweets);
+                  idArr.forEach((tweet) => {
+                    console.log(totalTweets);
+                    const db = getDatabase();
+                    const starCountRef = ref(db, `tweets/${tweet}`);
+                    onValue(starCountRef, (snapshot) => {
+                      const data = snapshot.val();
+                      snapshotStateArr = Object.values(data);
+
+                      snapshotStateArr.pop(snapshotStateArr[0]);
+                      console.log(snapshotStateArr);
+                      snapshotStateArr.sort((a, b) => {
+                        return new Date(a.created_at) < new Date(b.created_at)
+                          ? 1
+                          : -1;
+                      });
+                      console.log(snapshotStateArr[0]);
+                      overallTweets.push(snapshotStateArr[0]);
+                      console.log(overallTweets);
+                      overallTweets.sort((a, b) => {
+                        return new Date(a.created_at) < new Date(b.created_at)
+                          ? 1
+                          : -1;
+                      });
+
+                      // lihtml = ` <li class="twitter__main-page-content-messages-item">
+                      //   <div class="twitter__main-page-content-messages-item-userIcon">
+                      //     <img src="${snapshotStateArr[0].photoURL}" width="" />
+                      //   </div>
+                      //   <div
+                      //     class="twitter__main-page-content-messages-item-second-item"
+                      //   >
+                      //     <h1
+                      //       class="twitter__main-page-content-messages-item-second-item-name"
+                      //     >
+                      //       ${snapshotStateArr[0].user}
+                      //     </h1>
+                      //     <h2
+                      //       class="witter__main-page-content-messages-item-second-item-email"
+                      //     >
+                      //       ${snapshotStateArr[0].email}
+                      //     </h2>
+                      //     <div
+                      //       class="twitter__main-page-content-messages-item-second-item-messsage"
+                      //     >
+                      //       <p
+                      //         class="twitter__main-page-content-messages-item-second-item-messsage-text"
+                      //       >
+                      //         ${snapshotStateArr[0].message}
+                      //       </p>
+                      //     </div>
+                      //   </div>
+                      // </li>`;
+                      // ul.innerHTML += lihtml;
+                      ul.innerHTML = "";
+                      overallTweets.forEach((tweet) => {
+                        html = `
+                       <li class="twitter__main-page-content-messages-item">
+                    <div class="twitter__main-page-content-messages-item-userIcon">
+                      <img src="${tweet.photoURL}" width="" />
+                    </div>
+                    <div
+                      class="twitter__main-page-content-messages-item-second-item"
+                    >
+                      <h1
+                        class="twitter__main-page-content-messages-item-second-item-name"
+                      >
+                        ${tweet.user}
+                      </h1>
+                      <h2
+                        class="witter__main-page-content-messages-item-second-item-email"
+                      >
+                        ${tweet.email}
+                      </h2>
+                      <div
+                        class="twitter__main-page-content-messages-item-second-item-messsage"
+                      >
+                        <p
+                          class="twitter__main-page-content-messages-item-second-item-messsage-text"
+                        >
+                          ${tweet.message}
+                        </p>
+                      </div>
+                    </div>
+                  </li>`;
+                        ul.innerHTML += html;
+                      });
+                      console.log(data);
+                    });
+                  });
+
+                  console.log(overallTweets);
+                  ul.innerHTML = "";
                   overallTweets.forEach((tweet) => {
-                    const ul = document.querySelector(
-                      ".twitter__main-page-content-messages"
-                    );
                     html = `
                    <li class="twitter__main-page-content-messages-item">
                 <div class="twitter__main-page-content-messages-item-userIcon">
