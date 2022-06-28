@@ -2,7 +2,11 @@
 @import "./mixins";
 @import "./variable";
 @import "./loginMethods";
+@import url("https://fonts.googleapis.com/css2?family=Style+Script&display=swap");
 
+title {
+  font-family: "Style Script", cursive;
+}
 .twitter {
   display: flex;
   height: 100%;
@@ -70,7 +74,7 @@
         &-btn {
           border: none;
           padding: 5% 25%;
-          border-radius: 2rem;
+          border-radius: 2.5rem;
           background-color: $dark-primary-color;
           color: $white;
           text-decoration: none;
@@ -80,6 +84,8 @@
           text-transform: capitalize;
           transition: all 0.5s;
           @include btnhover;
+          font-family: "Style Script", cursive;
+          font-size: 1.5rem;
         }
         &-items {
           width: 100%;
@@ -225,13 +231,15 @@
               background: transparent;
               background-color: $dark-primary-color;
               color: $white;
-              padding: 0.7rem 1.2rem;
+              padding: 0.7rem 1.5rem;
               border-radius: 2rem;
               font-size: 1.1rem;
               font-weight: 600;
               text-transform: capitalize;
               transition: all 0.5s;
               @include btnhover;
+              font-family: "Style Script", cursive;
+              font-size: 1rem;
             }
           }
         }
@@ -594,9 +602,12 @@
   // width: 15rem;
   margin: 0 auto;
   // margin-bottom: 0.5rem;
-  &:hover {
-    background-color: rgba(255, 255, 255, 1);
-  }
+  // &:hover {
+  //   background-color: rgba(255, 255, 255, 1);
+  // }
+}
+.logo-green {
+  color: $primary-blue;
 }
 .width {
   width: 100%;
