@@ -81,7 +81,7 @@ export class User {
   }
 }
 
-export const preventDoubleSuggested = (email) => {
+export const preventDoubleSuggested = (email, id) => {
   const dbRef = ref(getDatabase());
   get(child(dbRef, `users`))
     .then((snapshot) => {
@@ -95,6 +95,22 @@ export const preventDoubleSuggested = (email) => {
       const objectVal = snapshot.val();
 
       const arr = Object.values(objectVal);
+      get(child(dbRef, `followers/${id}`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          let follow = snapshot.val();
+          let followAr = Object.values(follow);
+
+          for (let i = 0; i < followAr.length; i++) {
+            for (let j = 0; j < arr.length; j++) {
+              arr.filter((item) => {
+                if (followAr[i] === arr[j]) {
+                  console.log(arr);
+                }
+              });
+            }
+          }
+        }
+      });
       const newArr = arr.filter((item) => {
         return item.email !== email;
       });

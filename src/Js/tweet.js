@@ -216,10 +216,16 @@ export const loadTweets = (id, image, user, email) => {
                       console.log(snapshotStateArr[0]);
                       overallTweets.push(snapshotStateArr[1]);
                       console.log(overallTweets);
-                      let index = 1;
-                      if (index > -1) {
-                        overallTweets.splice(index, 1);
+                      if (
+                        snapshotStateArr[1].message ===
+                        snapshotStateArr[2].message
+                      ) {
+                        let index = 1;
+                        if (index > -1) {
+                          overallTweets.splice(index, 1);
+                        }
                       }
+
                       overallTweets.sort((a, b) => {
                         return new Date(a.created_at) < new Date(b.created_at)
                           ? 1

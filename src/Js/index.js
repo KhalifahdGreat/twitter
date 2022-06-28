@@ -134,7 +134,7 @@ const afterLogin = (email, user, photo) => {
 
     suggested.style.display = "block";
 
-    preventDoubleSuggested(email);
+    preventDoubleSuggested(email, id);
   });
   explore.forEach((explore) => {
     explore.addEventListener("click", (e) => {
@@ -145,7 +145,7 @@ const afterLogin = (email, user, photo) => {
       console.log("explore");
       suggested.style.display = "block";
       main.style.display = "none";
-      preventDoubleSuggested(email);
+      preventDoubleSuggested(email, id);
     });
   });
 
@@ -433,5 +433,6 @@ ul.addEventListener("click", (e) => {
         usr_email: email,
       }
     );
+    e.target.style.display = "none";
   }
 });
