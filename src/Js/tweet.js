@@ -220,7 +220,7 @@ export const loadTweets = (id, image, user, email) => {
                         snapshotStateArr[1].message ===
                         snapshotStateArr[2].message
                       ) {
-                        let index = 1;
+                        let index = 0;
                         if (index > -1) {
                           overallTweets.splice(index, 1);
                         }
